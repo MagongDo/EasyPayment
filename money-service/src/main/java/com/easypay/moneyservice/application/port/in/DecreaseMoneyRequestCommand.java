@@ -1,0 +1,26 @@
+package com.easypay.moneyservice.application.port.in;
+
+import com.easypay.common.SelfValidating;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Builder
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class DecreaseMoneyRequestCommand extends SelfValidating<DecreaseMoneyRequestCommand> {
+    @NotNull
+    private final String targetMembershipId;
+
+    @NotNull
+    private final int amount;
+
+
+    public DecreaseMoneyRequestCommand(String targetMembershipId, int amount) {
+        this.targetMembershipId = targetMembershipId;
+        this.amount = amount;
+
+        this.validateSelf();
+    }
+}

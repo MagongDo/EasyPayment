@@ -6,34 +6,36 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
 
-
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Membership {
-    @Getter
-    private final String membershipId;
-    @Getter
-    private final String name;
-    @Getter
-    private final String email;
-    @Getter
-    private final String address;
-    @Getter
-    private final boolean isValid;
-    @Getter
-    private final boolean isCorp;
+    @Getter private final String membershipId;
+    @Getter private final String name;
+    @Getter private final String email;
+    @Getter private final String address;
+    @Getter private final boolean isValid;
+    @Getter private final boolean isCorp;
 
+    @Getter private final String refreshToken;
     // Membership
-    // 오염이 되면 안되는 클래스, 고객정보, 핵심 도메인
-    public static Membership generateMember(
-            MembershipId membershipId, MembershipName membershipName, MembershipEmail membershipEmail, MembershipAddress membershipAddress, MembershipIsValid membershipIsValid,
-            MembershipIsCorp membershipIsCorp) {
+    // 오염이 되면 안되는 클래스. 고객 정보. 핵심 도메인
+
+    public static Membership generateMember (
+            MembershipId membershipId
+            , MembershipName membershipName
+            , MembershipEmail membershipEmail
+            , MembershipAddress membershipAddress
+            , MembershipIsValid membershipIsValid
+            , MembershipIsCorp membershipIsCorp
+            , MembershipRefreshToken membershipRefreshToken
+    ){
         return new Membership(
                 membershipId.membershipId,
                 membershipName.nameValue,
                 membershipEmail.emailValue,
                 membershipAddress.addressValue,
                 membershipIsValid.isValidValue,
-                membershipIsCorp.isCorp
+                membershipIsCorp.isCorpValue,
+                membershipRefreshToken.refreshToken
         );
     }
 
@@ -50,8 +52,7 @@ public class Membership {
         public MembershipName(String value) {
             this.nameValue = value;
         }
-
-        String nameValue;
+        String nameValue ;
     }
     @Value
     public static class MembershipEmail {
@@ -80,8 +81,16 @@ public class Membership {
     @Value
     public static class MembershipIsCorp {
         public MembershipIsCorp(boolean value) {
-            this.isCorp = value;
+            this.isCorpValue = value;
         }
-        boolean isCorp;
+        boolean isCorpValue;
+    }
+
+    @Value
+    public static class MembershipRefreshToken {
+        public MembershipRefreshToken(String value) {
+            this.refreshToken = value;
+        }
+        String refreshToken;
     }
 }

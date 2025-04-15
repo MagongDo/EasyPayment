@@ -1,3 +1,4 @@
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.1'
@@ -5,6 +6,12 @@ plugins {
 }
 
 
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
 
 java {
     toolchain {
@@ -12,11 +19,11 @@ java {
     }
 }
 
-
+group = 'com.easypay'
+version = '0.0.1-SNAPSHOT'
 
 subprojects {
-    group = 'com.easypay'
-    version = '0.0.1-SNAPSHOT'
+
     sourceCompatibility = '17'
     apply plugin: 'java'
     apply plugin: 'java-library'
@@ -32,17 +39,39 @@ subprojects {
         mavenCentral()
     }
     dependencies {
+//        implementation project(':common')
+//        implementation 'org.springframework.boot:spring-boot-starter-validation'
+//        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//        implementation 'org.springframework.boot:spring-boot-starter-web'
+//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//        implementation 'org.jetbrains:annotations:23.0.0'
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.1.10'
+        implementation 'com.google.protobuf:protobuf-java:3.25.1'
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.projectlombok:lombok'
+        compileOnly 'org.projectlombok:lombok:1.18.36'
+        annotationProcessor 'org.projectlombok:lombok:1.18.36'
+        testCompileOnly 'org.projectlombok:lombok:1.18.36'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
+        implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        runtimeOnly 'com.mysql:mysql-connector-j'
+//        runtimeOnly 'com.mysql:mysql-connector-j'
+        implementation 'mysql:mysql-connector-java:8.0.33'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-        runtimeOnly 'com.h2database:h2'
-
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+        testImplementation 'org.jmock:jmock-junit4:2.13.1'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springframework.kafka:spring-kafka'
+//        compileOnly 'org.projectlombok:lombok'
+//        annotationProcessor 'org.projectlombok:lombok'
+//        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+//        implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+//        implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+//        testImplementation 'com.tngtech.archunit:archunit:1.0.1'
+//        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        tasks.register("prepareKotlinBuildScriptModel"){}
     }
 
     tasks.named('test') {
@@ -50,14 +79,4 @@ subprojects {
     }
 }
 
-tasks.named('bootJar') {
-    enabled = false // 루트 프로젝트에서는 중복된 실행 가능한 JAR 파일을 생성하는 것을 방지
-}
 
-tasks.named('jar') {
-    enabled = true // 각 모듈의 라이브러리 JAR 파일을 생성하기 위해 킴
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
-}

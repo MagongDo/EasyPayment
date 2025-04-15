@@ -1,12 +1,13 @@
 package com.easypay.membershipservice.application.service;
 
+import com.easypay.common.UseCase;
 import com.easypay.membershipservice.adapter.out.persistence.MembershipJpaEntity;
 import com.easypay.membershipservice.adapter.out.persistence.MembershipMapper;
 import com.easypay.membershipservice.application.port.in.RegisterMembershipCommand;
 import com.easypay.membershipservice.application.port.in.RegisterMembershipUseCase;
 import com.easypay.membershipservice.application.port.out.RegisterMembershipPort;
 import com.easypay.membershipservice.domain.Membership;
-import common.UseCase;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
