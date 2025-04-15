@@ -1,6 +1,5 @@
 package com.easypay.membershipservice.application.port.in;
-
-import common.SelfValidating;
+import com.easypay.common.SelfValidating;
 import jakarta.validation.constraints.AssertTrue;
 
 import jakarta.validation.constraints.NotNull;

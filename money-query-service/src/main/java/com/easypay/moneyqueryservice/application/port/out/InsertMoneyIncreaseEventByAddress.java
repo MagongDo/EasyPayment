@@ -1,0 +1,7 @@
+package com.easypay.moneyqueryservice.application.port.out;
+
+import java.util.Date;
+
+public interface InsertMoneyIncreaseEventByAddress {
+    void insertMoneyIncreaseEventByAddress(String addressName, int moneyIncrease);
+}
